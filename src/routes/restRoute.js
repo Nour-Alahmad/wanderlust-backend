@@ -53,45 +53,45 @@ async function getUserRest(req, res) {
   res.status(200).json(favs);
 }
 
-// const axios = require('axios');
+const axios = require('axios');
 
-// const options = {
-//     method: 'GET',
-//     url: 'https://travel-advisor.p.rapidapi.com/restaurants/list',
-//     params: {
-//       location_id: '293986',
-//       currency: 'USD',
-//       lunit: 'km',
-//       limit: '30',
-//       open_now: 'false',
-//       lang: 'en_US'
-//     },
-//     headers: {
-//       'X-RapidAPI-Key': 'f95fad8474mshfda9db1236f9ff1p1cd619jsn8fa818dcf78b',
-//       'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
-//     }
-//   };
+const options = {
+    method: 'GET',
+    url: 'https://travel-advisor.p.rapidapi.com/restaurants/list',
+    params: {
+      location_id: '293986',
+      currency: 'USD',
+      lunit: 'km',
+      limit: '30',
+      open_now: 'false',
+      lang: 'en_US'
+    },
+    headers: {
+      'X-RapidAPI-Key': 'f95fad8474mshfda9db1236f9ff1p1cd619jsn8fa818dcf78b',
+      'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
+    }
+  };
 
-//   restRouter.post('/add', addHandler)
+  restRouter.post('/addR', addHandler)
 
-//   async function addHandler(req, res) {
-//     axios.request(options).then((data) => {
-//         data.data.data.map( (item) => {
+  async function addHandler(req, res) {
+    axios.request(options).then((data) => {
+        data.data.data.map( (item) => {
 
-//             let restaurantData = {
-//                 "name":item.name,
-//                  "img":item.photo?.images?.large?.url,
-//                  "description": item.description,
-//                   "location":item.address,
-//                  "rating": item.rating,
-//                  "phone": item.phone,
-//                  "email": item.email,
-//                  "website": item.website,
-//                  "ownerId":1};
+            let restaurantData = {
+                "name":item.name,
+                 "img":item.photo?.images?.large?.url,
+                 "description": item.description,
+                  "location":item.address,
+                 "rating": item.rating,
+                 "phone": item.phone,
+                 "email": item.email,
+                 "website": item.website,
+                 "ownerId":1};
 
-//  restaurant.create(restaurantData);
-//         })
-//         res.status(200).json('done');
-//     });
-// }
+ restaurant.create(restaurantData);
+        })
+        res.status(200).json('done');
+    });
+}
 module.exports = restRouter;

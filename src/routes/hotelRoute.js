@@ -53,46 +53,46 @@ async function getUserhotel(req, res) {
   res.status(200).json(favs);
 }
 
-// const axios = require("axios");
+const axios = require("axios");
 
-// const options = {
-//     method: 'GET',
-//     url: 'https://travel-advisor.p.rapidapi.com/hotels/list',
-//     params: {
-//       location_id: '293986',
-//       adults: '2',
-//       rooms: '2',
-//       nights: '2',
-//       offset: '0',
-//       currency: 'USD',
-//       order: 'asc',
-//       sort: 'recommended',
-//       lang: 'en_US'
-//     },
-//     headers: {
-//       'X-RapidAPI-Key': 'f95fad8474mshfda9db1236f9ff1p1cd619jsn8fa818dcf78b',
-//       'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
-//     }
-//   };
+const options = {
+    method: 'GET',
+    url: 'https://travel-advisor.p.rapidapi.com/hotels/list',
+    params: {
+      location_id: '293986',
+      adults: '2',
+      rooms: '2',
+      nights: '2',
+      offset: '0',
+      currency: 'USD',
+      order: 'asc',
+      sort: 'recommended',
+      lang: 'en_US'
+    },
+    headers: {
+      'X-RapidAPI-Key': 'f95fad8474mshfda9db1236f9ff1p1cd619jsn8fa818dcf78b',
+      'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
+    }
+  };
 
-// hotelRouter.post("/add", addHandler);
+hotelRouter.post("/addH", addHandler);
 
-// async function addHandler(req, res) {
-//   axios.request(options).then((data) => {
-//     data.data.data.map((item) => {
-//       let hotelData = {
-//         name: item.name,
-//         img: item.photo?.images?.large?.url,
-//         rating: item.rating,
-//         phone: item.phone,
-//         email: item.email,
-//         price: item.price,
-//         ownerId: 1,
-//       };
-//       hotel.create(hotelData);
-//     });
-//     res.status(200).json("done");
-//   });
-// }
+async function addHandler(req, res) {
+  axios.request(options).then((data) => {
+    data.data.data.map((item) => {
+      let hotelData = {
+        name: item.name,
+        img: item.photo?.images?.large?.url,
+        rating: item.rating,
+        phone: item.phone,
+        email: item.email,
+        price: item.price,
+        ownerId: 1,
+      };
+      hotel.create(hotelData);
+    });
+    res.status(200).json("done");
+  });
+}
 
 module.exports = hotelRouter;
